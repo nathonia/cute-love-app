@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You More ❤️</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom bounce animation for extra cuteness */
+        @keyframes popBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-pop-bounce {
+            animation: popBounce 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-pink-50 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Content Card -->
+    <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-2xl max-w-lg w-full text-center border-4 border-pink-300 transform transition-transform hover:scale-[1.01]">
+
+        <!-- Main Cute Message -->
+        <h1 class="text-5xl sm:text-6xl font-extrabold text-red-500 mb-8 leading-tight">
+            <span class="text-3xl sm:text-4xl">💖</span>
+            I love you more
+            <span class="text-3xl sm:text-4xl">💖</span>
+        </h1>
+        <p class="text-xl text-gray-600 mb-10">A simple truth universally acknowledged.</p>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+            
+            <button id="agreeButton" onclick="showMessage('agree')"
+                class="flex-1 px-8 py-4 bg-green-500 text-white font-bold rounded-xl shadow-lg hover:bg-green-600 transition duration-200 transform hover:scale-[1.05] active:scale-100 focus:outline-none focus:ring-4 focus:ring-green-300">
+                I agree
+            </button>
+
+            <button id="winButton" onclick="showMessage('win')"
+                class="flex-1 px-8 py-4 bg-purple-500 text-white font-bold rounded-xl shadow-lg hover:bg-purple-600 transition duration-200 transform hover:scale-[1.05] active:scale-100 focus:outline-none focus:ring-4 focus:ring-purple-300">
+                You win
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Custom Modal/Pop-up Area -->
+    <div id="customModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50 p-4" onclick="closeModal()">
+        <div id="modalContent" class="bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center animate-pop-bounce border-4 border-red-400" onclick="event.stopPropagation()">
+            <div id="modalText" class="text-3xl font-extrabold text-gray-800 mb-6"></div>
+            <button onclick="closeModal()" class="px-6 py-2 bg-pink-500 text-white font-semibold rounded-lg hover:bg-pink-600 transition duration-150 shadow-md">
+                Got it!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('customModal');
+        const modalText = document.getElementById('modalText');
+        const modalContent = document.getElementById('modalContent');
+
+        /**
+         * Displays the custom modal with a specific message based on the button clicked.
+         * @param {string} type - 'agree' or 'win'
+         */
+        function showMessage(type) {
+            let message = "";
+            let colorClass = "text-gray-800"; // Default
+            let borderColor = "border-red-400"; // Default
+
+            if (type === 'agree') {
+                message = "You are MINE! 🥰";
+                colorClass = "text-red-600";
+                borderColor = "border-red-600";
+            } else if (type === 'win') {
+                // Make "Sukkkka" extra cute!
+                message = "S u k k k k a ! ✨😘";
+                colorClass = "text-purple-600 text-5xl italic";
+                borderColor = "border-purple-400";
+            }
+            
+            // Set the content and styling
+            modalText.innerHTML = message;
+            modalText.className = `text-3xl font-extrabold mb-6 ${colorClass}`;
+            modalContent.className = `bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center animate-pop-bounce border-4 ${borderColor}`;
+            
+            // Show the modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        /**
+         * Hides the custom modal.
+         */
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
+
+</body>
+</html>
